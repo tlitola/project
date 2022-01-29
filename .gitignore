@@ -35,3 +35,14 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+/certificates
+server.js
+
+yarn.lock
+.prettierignore
+.prettierrc.json
+.eslintrc.json
+.eslintignore
+
+certificates

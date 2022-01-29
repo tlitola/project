@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="56.881687mm"
+   height="77.795067mm"
+   viewBox="0 0 56.881687 77.795067"
+   version="1.1"
+   id="svg5"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient12098">
+      <stop
+         style="stop-color:#aa0044;stop-opacity:1"
+         offset="0"
+         id="stop12094" />
+      <stop
+         style="stop-color:#800033;stop-opacity:1"
+         offset="1"
+         id="stop12096" />
+    </linearGradient>
+    <rect
+       x="223.25496"
+       y="494.90784"
+       width="143.63255"
+       height="217.01006"
+       id="rect957" />
+    <linearGradient
+       xlink:href="#linearGradient12098"
+       id="linearGradient12100"
+       x1="301.81955"
+       y1="600.67792"
+       x2="246.3185"
+       y2="643.88068"
+       gradientUnits="userSpaceOnUse"
+       spreadMethod="pad" />
+  </defs>
+  <g
+     id="layer1"
+     transform="translate(-95.346865,-134.34932)">
+    <text
+       xml:space="preserve"
+       transform="matrix(0.46888563,0,0,0.56411559,-11.400627,-166.18696)"
+       id="text955"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:1.25;font-family:sans-serif;white-space:pre;shape-inside:url(#rect957);fill:url(#linearGradient12100);fill-opacity:1;stroke:none"><tspan
+         x="223.25586"
+         y="654.91281"
+         id="tspan14431"><tspan
+           style="font-size:192px;font-family:'Brush Script MT';-inkscape-font-specification:'Brush Script MT, Normal'"
+           id="tspan14429">P</tspan></tspan></text>
+  </g>
+</svg>
