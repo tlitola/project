@@ -1,3 +1,4 @@
+import React, { createContext, useState } from 'react'
 import NavBar, { Url } from './navbar'
 
 const urls: Url[] = [
@@ -19,13 +20,24 @@ const urls: Url[] = [
 	},
 ]
 
-const authenticated = false
+export const HistoryContext = createContext<
+	[string[], React.Dispatch<React.SetStateAction<string[]>>]
+>([
+	[],
+	// eslint-disable-next-line @typescript-eslint/no-empty-function
+	() => {},
+])
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+	const [history, setHistory] = useState<string[]>([])
+
 	return (
 		<>
-			<NavBar urls={urls} authenticated={authenticated} />
-			{children}
+			<NavBar urls={urls} authenticated={false} />
+
+			<HistoryContext.Provider value={[history, setHistory]}>
+				{children}
+			</HistoryContext.Provider>
 		</>
 	)
 }

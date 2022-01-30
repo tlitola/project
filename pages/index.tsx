@@ -1,13 +1,22 @@
 import type { NextPage } from 'next'
 import Head from 'next/head'
 import Image from 'next/image'
-import { Layout } from '../components/layout'
+import router from 'next/router'
+import { useContext, useEffect } from 'react'
+import { HistoryContext } from '../components/layout'
 
 const Home: NextPage = () => {
+	const [, setHistory] = useContext(HistoryContext)
+
+	useEffect(() => {
+		setHistory((prev) => [...prev, router.pathname])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
 	return (
-		<Layout>
+		<>
 			<Head>
-				<title>Create Next App</title>
+				<title>Project</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
 			<Image
@@ -18,7 +27,7 @@ const Home: NextPage = () => {
 				alt=""
 				layout="responsive"
 			/>
-		</Layout>
+		</>
 	)
 }
 

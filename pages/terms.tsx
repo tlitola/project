@@ -1,12 +1,16 @@
 import { NextPage } from 'next'
-import { Layout } from '../components/layout'
+import router from 'next/router'
+import { useContext, useEffect } from 'react'
+import { HistoryContext } from '../components/layout'
 
-const Terms: NextPage = () => (
-	<>
-		<Layout>
-			<p>Nothing to see here</p>
-		</Layout>
-	</>
-)
+const Terms: NextPage = () => {
+	const [, setHistory] = useContext(HistoryContext)
 
+	useEffect(() => {
+		setHistory((prev) => [...prev, router.pathname])
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [])
+
+	return <p>There is nothing to see here</p>
+}
 export default Terms
