@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { BaseRouter } from 'next/dist/shared/lib/router/router'
 import React, { useMemo, useState } from 'react'
-import _ from 'lodash'
+import debounce from 'lodash.debounce'
 
 export interface Url {
 	url: string
@@ -22,7 +22,7 @@ const NavBar: React.FC<Props> = ({ urls, authenticated }) => {
 
 	const onMenuClick = useMemo(
 		() =>
-			_.debounce(() => setShowMenu((prev) => !prev), 100, {
+			debounce(() => setShowMenu((prev) => !prev), 100, {
 				leading: true,
 				trailing: false,
 			}),

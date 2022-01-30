@@ -10,7 +10,14 @@ const Home: NextPage = () => {
 				<title>Create Next App</title>
 				<link rel="icon" href="/favicon.ico" />
 			</Head>
-			<Image src={'/bg.svg'} width={1920} height={1082} alt="" />
+			<Image
+				className="h-30"
+				src={'/bg.svg'}
+				width={1920}
+				height={1082}
+				alt=""
+				layout="responsive"
+			/>
 		</Layout>
 	)
 }
