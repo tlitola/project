@@ -1,6 +1,6 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import type { NextApiRequest, NextApiResponse } from 'next'
 import { PrismaClient, User } from '@prisma/client'
+import { withAuth } from '../../../middleware/withAuth'
 
 const prisma = new PrismaClient()
 
@@ -9,10 +9,10 @@ const addUser = async (data: User): Promise<User[]> => {
 	return users
 }
 
-export default function handler(
+const handler = (
 	req: NextApiRequest,
 	res: NextApiResponse<User[] | Error>
-): Promise<void> {
+): Promise<void> => {
 	return addUser(req.body)
 		.then((users: User[]) => {
 			res.status(200).json(users)
@@ -22,3 +22,5 @@ export default function handler(
 			await prisma.$disconnect()
 		})
 }
+
+export default withAuth(handler)
