@@ -16,4 +16,25 @@ model User {
   fist_name    String?
   last_name    String?
   password     String
+  keys         AuthKey[]
+}
+
+model AuthKey{
+  user         User @relation(fields: [userId], references: [id])
+  userId       Int @unique
+  primaryKey   String
+  secondaryKey String
+  status       Boolean?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+}
+
+model ApiKey{
+  key          String @unique
+  version      Int
+  data         String?
+  status       Boolean
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
