@@ -1,20 +1,22 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { validateApiKey } from '../validate'
-import nc, { NextConnect, Options } from 'next-connect'
+import prisma from '../../prisma/client'
 
-const checkKey = (
-	req: NextApiRequest,
-	res: NextApiResponse,
-	next: () => void
-): void => {
-	if (!validateApiKey(req.headers)) {
-		throw new Error('401|Authentication needed')
-	}
-	next()
-}
+export default async function withApiKey(
+  req: NextApiRequest,
+  res: NextApiResponse,
+  next: () => void
+): Promise<void> {
+  validateApiKey(req.headers)
 
-export default function withApiKey(
-	options?: Options<NextApiRequest, NextApiResponse> | undefined
-): NextConnect<NextApiRequest, NextApiResponse> {
-	return nc(options).use(checkKey)
+  const key =
+    (await prisma.apiKey.count({
+      where: {
+        status: true,
+        key: req.headers['x-api-key'] as string,
+      },
+    })) > 0
+
+  if (!key) throw new Error('401|Authentication needed')
+  next()
 }

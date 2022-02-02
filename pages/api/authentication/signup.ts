@@ -1,33 +1,25 @@
-import type { NextApiRequest, NextApiResponse } from 'next'
-import { PrismaClient, User } from '@prisma/client'
-import withApiKey from '../../../lib/middleware/withKey'
+import { validateUser } from '../../../lib/validate'
+import { addUser, userExists } from '../../../prisma/User/user'
+import signupHandler from './_handler'
+import crypto from 'crypto'
+import { addKeys } from '../../../prisma/Jwt/Jwt'
+import { createTokens } from '../../../lib/JWT'
+import { pick } from 'lodash'
 
-const prisma = new PrismaClient()
+const handler = signupHandler().post(async (req, res) => {
+  validateUser(req.body)
+  await userExists(req.body.useremail)
+  const user = await addUser(req.body.user)
 
-const addUser = async (data: User): Promise<User[]> => {
-	const users = await prisma.user.findMany()
-	return users
-}
+  const accessTokenKey = crypto.randomBytes(64).toString('hex')
+  const refreshTokenKey = crypto.randomBytes(64).toString('hex')
 
-const handler = withApiKey({
-	onError: (err: Error, req, res) => {
-		const code: string = err.message.split('|')[0]
-		const message: string = err.message.split('|')[1]
-		if (code !== '401') console.error(err.stack)
+  const keys = await addKeys(user, accessTokenKey, refreshTokenKey)
+  const tokens = await createTokens(user, keys)
 
-		res.status(Number(code)).end(message)
-	},
-	onNoMatch: (req, res) => {
-		res.status(404).end('Page is not found')
-	},
-}).get(async (req, res) => {
-	await addUser(req.body)
-		.then((users: User[]) => {
-			res.status(200).json(users)
-		})
-		.finally(async () => {
-			await prisma.$disconnect()
-		})
+  res
+    .status(200)
+    .json({ user: pick(user, ['email', 'id', 'first_name', 'last_name']), tokens })
 })
 
 export default handler
