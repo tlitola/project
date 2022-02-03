@@ -16,6 +16,7 @@ model User {
   first_name    String?
   last_name    String?
   password     String
+  active       Boolean @default(true)
   keys         AuthKey[]
 }
 
@@ -24,7 +25,7 @@ model AuthKey{
   userId       String 
   primaryKey   String @unique
   secondaryKey String @unique
-  status       Boolean? @default(true)
+  active       Boolean? @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
@@ -35,7 +36,7 @@ model ApiKey{
   version      Float
   description  String?
   data         String?
-  status       Boolean
+  active       Boolean @default(true)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }

@@ -2,7 +2,7 @@ import { NextApiRequest, NextApiResponse } from 'next'
 import { validateApiKey } from '../validate'
 import prisma from '../../prisma/client'
 
-export default async function withApiKey(
+export default async function withKey(
   req: NextApiRequest,
   res: NextApiResponse,
   next: () => void
@@ -12,7 +12,7 @@ export default async function withApiKey(
   const key =
     (await prisma.apiKey.count({
       where: {
-        status: true,
+        active: true,
         key: req.headers['x-api-key'] as string,
       },
     })) > 0

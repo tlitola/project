@@ -15,14 +15,14 @@ interface JWTinfo {
 export default class JWT {
   private static async readPublicKey(): Promise<string> {
     return await readFile(
-      path.join(__dirname, '../../../../../certificates/public.pem'),
+      '/Users/touko/Documents/Code/next/project/certificates/public.pem',
       'utf8'
     )
   }
 
   private static async readPrivateKey(): Promise<string> {
     return await readFile(
-      path.join(__dirname, '../../../../../certificates/private.pem'),
+      '/Users/touko/Documents/Code/next/project/certificates/private.pem',
       'utf8'
     )
   }

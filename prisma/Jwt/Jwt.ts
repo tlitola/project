@@ -17,3 +17,41 @@ export const addKeys = async (
   }
   return keys
 }
+
+export const keyExists = async (
+  key: string,
+  token: 'primaryKey' | 'secondary|Key'
+): Promise<AuthKey | null> => {
+  let exists: AuthKey | null
+  try {
+    exists = await prisma.authKey.findFirst({
+      where: {
+        [token]: key,
+        active: true,
+      },
+    })
+  } catch (e) {
+    console.error(e)
+    throw new Error('500|Something went wrong')
+  }
+  if (exists === null) throw new Error('401|Authentication needed')
+
+  return exists
+}
+
+export const removeKey = async (
+  key: string,
+  token: 'primaryKey' | 'secondary|Key'
+): Promise<void> => {
+  try {
+    await prisma.authKey.deleteMany({
+      where: {
+        [token]: key,
+        active: true,
+      },
+    })
+  } catch (e) {
+    console.error(e)
+    throw new Error('500|Something went wrong')
+  }
+}

@@ -1,13 +1,22 @@
-import { NextApiRequest, NextApiResponse } from 'next'
+import { AuthKey, User } from '@prisma/client'
+import { NextApiResponse } from 'next'
+import { NextApiRequestWithAuth } from '../../pages/api/_authHandler'
+import { keyExists } from '../../prisma/Jwt/Jwt'
+import { getUser, userActive } from '../../prisma/User/user'
+import JWT from '../JWT'
+import { validateAuth } from '../validate'
 
-export const withAuth = (handler: {
-	(req: NextApiRequest, res: NextApiResponse): Promise<void>
-}) => {
-	return async (req: NextApiRequest, res: NextApiResponse) => {
-		const token = true
-		if (!token) {
-			return res.status(200).json({ foo: 'bar' })
-		}
-		return handler(req, res)
-	}
+export default async function withAuth(
+  req: NextApiRequestWithAuth,
+  res: NextApiResponse,
+  next: () => void
+): Promise<void> {
+  validateAuth(req.cookies)
+  const accessToken = await JWT.validate(req.cookies.accessToken)
+  await userActive('id', accessToken.sub)
+
+  req.key = (await keyExists(accessToken.prm, 'primaryKey')) as AuthKey
+  req.user = (await getUser('id', accessToken.sub)) as User
+
+  next()
 }

@@ -1,9 +1,17 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nextConnect, { NextConnect } from 'next-connect'
-import withApiKey from '../../../lib/middleware/withKey'
+import withAuth from '../../lib/middleware/withAuth'
+import withKey from '../../lib/middleware/withKey'
+import Cors from 'cors'
+import { AuthKey, User } from '@prisma/client'
 
-export default function signupHandler(): NextConnect<
-  NextApiRequest,
+export type NextApiRequestWithAuth = NextApiRequest & {
+  user: User
+  key: AuthKey
+}
+
+export default function authHandler(): NextConnect<
+  NextApiRequestWithAuth,
   NextApiResponse
 > {
   return nextConnect({
@@ -22,5 +30,12 @@ export default function signupHandler(): NextConnect<
       // eslint-disable-next-line @typescript-eslint/no-extra-semi
       ;(res as NextApiResponse).status(404).end('Page is not found')
     },
-  }).use(withApiKey)
+  })
+    .use(
+      Cors({
+        origin: 'https:localhost:3000',
+      })
+    )
+    .use(withKey)
+    .use(withAuth)
 }
