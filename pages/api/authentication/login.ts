@@ -1,11 +1,11 @@
-import { validateLogin } from '../../../lib/validate'
-import { getUser, userActive } from '../../../prisma/User/user'
+import { validateLogin } from '@lib/api/validate'
+import { getUser, userActive } from '@prisma_folder/User/user'
 import apiKeyHandler from '../_apiKeyHandler'
 import crypto from 'crypto'
-import { addKeys, keyExists } from '../../../prisma/Jwt/Jwt'
-import JWT, { createTokens } from '../../../lib/JWT'
+import { addKeys, keyExists } from '@prisma_folder/Jwt/Jwt'
+import JWT, { createTokens } from '@lib/api/JWT'
 import { pick } from 'lodash'
-import { getAuthCookie } from '../../../lib/authUtils'
+import { getAuthCookie } from '@lib/api/authUtils'
 import { User } from '@prisma/client'
 import argon2 from 'argon2'
 
@@ -27,7 +27,7 @@ const handler = apiKeyHandler().post(async (req, res) => {
 
   const user = (await getUser('email', req.body.user.email)) as User
 
-  if (!argon2.verify(user.password, req.body.user.password))
+  if (!(await argon2.verify(user.password, req.body.user.password)))
     throw new Error('400|Incorrect user data')
 
   const accessTokenKey = crypto.randomBytes(64).toString('hex')

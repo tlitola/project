@@ -1,11 +1,11 @@
-import { validateAuth, validateRefresh, validateUser } from '../../../lib/validate'
-import { addUser, getUser, userActive, userExists } from '../../../prisma/User/user'
+import { validateRefresh } from '@lib/api/validate'
+import { getUser, userActive } from '@prisma_folder/User/user'
 import apiKeyHandler from '../_apiKeyHandler'
 import crypto from 'crypto'
-import { addKeys, keyExists, removeKey } from '../../../prisma/Jwt/Jwt'
-import JWT, { createTokens } from '../../../lib/JWT'
+import { addKeys, keyExists, removeKey } from '@prisma_folder/Jwt/Jwt'
+import JWT, { createTokens } from '@lib/api/JWT'
 import { pick } from 'lodash'
-import { getAuthCookie } from '../../../lib/authUtils'
+import { getAuthCookie } from '@lib/api/authUtils'
 import { User } from '@prisma/client'
 
 const handler = apiKeyHandler().get(async (req, res) => {

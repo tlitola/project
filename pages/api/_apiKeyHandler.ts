@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nextConnect, { NextConnect } from 'next-connect'
-import withKey from '../../lib/middleware/withKey'
+import withKey from '@lib/api/middleware/withKey'
 import Cors from 'cors'
 
 export default function apiKeyHandler(): NextConnect<
@@ -16,12 +16,19 @@ export default function apiKeyHandler(): NextConnect<
         message = err.message.split('|')[1]
       }
 
-      if (code < 400 || code > 499) console.error(err.stack)
-      ;(res as NextApiResponse).status(code).end(message)
+      if (code < 400 || code > 499 || process.env.NODE_ENV === 'development')
+        console.error(err.stack)
+      ;(res as NextApiResponse)
+        .status(code)
+        .setHeader('Content-Type', 'text/plain')
+        .send(message)
     },
     onNoMatch: (req, res) => {
       // eslint-disable-next-line @typescript-eslint/no-extra-semi
-      ;(res as NextApiResponse).status(404).end('Page is not found')
+      ;(res as NextApiResponse)
+        .status(404)
+        .setHeader('Content-Type', 'text/plain')
+        .send('Page is not found')
     },
   })
     .use(

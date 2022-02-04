@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import nextConnect, { NextConnect } from 'next-connect'
-import withAuth from '../../lib/middleware/withAuth'
-import withKey from '../../lib/middleware/withKey'
+import withAuth from '@lib/api/middleware/withAuth'
+import withKey from '@lib/api/middleware/withKey'
 import Cors from 'cors'
 import { AuthKey, User } from '@prisma/client'
 
@@ -23,12 +23,19 @@ export default function authHandler(): NextConnect<
         message = err.message.split('|')[1]
       }
 
-      if (code < 400 || code > 499) console.error(err.stack)
-      ;(res as NextApiResponse).status(code).end(message)
+      if (code < 400 || code > 499 || process.env.NODE_ENV === 'development')
+        console.error(err.stack)
+      ;(res as NextApiResponse)
+        .status(code)
+        .setHeader('Content-Type', 'text/plain')
+        .end(message)
     },
     onNoMatch: (req, res) => {
       // eslint-disable-next-line @typescript-eslint/no-extra-semi
-      ;(res as NextApiResponse).status(404).end('Page is not found')
+      ;(res as NextApiResponse)
+        .status(404)
+        .setHeader('Content-Type', 'text/plain')
+        .end('Page is not found')
     },
   })
     .use(

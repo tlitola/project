@@ -7,11 +7,13 @@ export const userExists = async (criteria: string, value: string): Promise<void>
   let exists = false
   try {
     exists =
-      (await prisma.user.count({
-        where: {
-          [criteria]: value,
-        },
-      })) > 0
+      (
+        await prisma.user.findMany({
+          where: {
+            [criteria]: value,
+          },
+        })
+      ).length > 0
   } catch (e) {
     console.error(e)
     throw new Error('500|Something went wrong')
@@ -26,12 +28,14 @@ export const userActive = async (criteria: string, value: string): Promise<void>
   let exists = false
   try {
     exists =
-      (await prisma.user.count({
-        where: {
-          [criteria]: value,
-          active: true,
-        },
-      })) > 0
+      (
+        await prisma.user.findMany({
+          where: {
+            [criteria]: value,
+            active: true,
+          },
+        })
+      ).length > 0
   } catch (e) {
     console.error(e)
     throw new Error('500|Something went wrong')

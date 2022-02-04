@@ -1,5 +1,5 @@
-import { removeKey } from '../../../prisma/Jwt/Jwt'
-import { removeAuthCookie } from '../../../lib/authUtils'
+import { removeKey } from '@prisma_folder/Jwt/Jwt'
+import { removeAuthCookie } from '@lib/api/authUtils'
 import authHandler from '../_authHandler'
 
 const handler = authHandler().get(async (req, res) => {

@@ -25,7 +25,7 @@ const authSchema = Joi.object()
 export const validateAuth = (cookies: NextApiRequestCookies): void => {
   const { error } = authSchema.validate(cookies)
 
-  if (error !== undefined) throw new Error('401|Authentication needed')
+  if (error !== undefined) throw new Error('401|' + error.message)
 }
 
 const refreshSchema = Joi.object()
@@ -65,7 +65,7 @@ const userSchema = Joi.object().keys({
 export const validateUser = (body: NextApiRequest['body']): void => {
   const { error } = userSchema.validate(body.user)
 
-  if (error !== undefined) throw new Error('400|Incorrect user data')
+  if (error !== undefined) throw new Error('400|' + error.message)
 }
 
 const loginSchema = Joi.object().keys({
@@ -80,5 +80,5 @@ const loginSchema = Joi.object().keys({
 export const validateLogin = (body: NextApiRequest['body']): void => {
   const { error } = loginSchema.validate(body.user)
 
-  if (error !== undefined) throw new Error('400|Incorrect user data')
+  if (error !== undefined) throw new Error('400|' + error.message)
 }

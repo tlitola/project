@@ -1,13 +1,14 @@
 import '../styles/globals.css'
+import 'react-toastify/dist/ReactToastify.css'
 import type { AppProps } from 'next/app'
-import { Layout } from '../components/layout'
+import { Layout } from '@components/layout'
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }) => {
-	return (
-		<Layout>
-			<Component {...pageProps} />
-		</Layout>
-	)
+  return (
+    <Layout>
+      <Component {...pageProps} />
+    </Layout>
+  )
 }
 
 export default MyApp

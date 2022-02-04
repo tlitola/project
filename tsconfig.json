@@ -1,28 +1,37 @@
 {
-	"compilerOptions": {
-		"target": "esnext",
-		"lib": ["dom", "dom.iterable", "esnext"],
-		"allowJs": true,
-		"skipLibCheck": true,
-		"strict": true,
-		"forceConsistentCasingInFileNames": true,
-		"noEmit": true,
-		"esModuleInterop": true,
-		"module": "esnext",
-		"moduleResolution": "node",
-		"resolveJsonModule": true,
-		"isolatedModules": true,
-		"jsx": "preserve",
-		"incremental": true
-	},
-	"include": [
-		"next-env.d.ts",
-		"**/*.ts",
-		"**/*.tsx",
-		"components/*.tsx",
-		"lib/middleware/withAuth.js",
-		"lib/middleware/withAuth.js",
-		"middleware/withAuth.js"
-	],
-	"exclude": ["node_modules"]
+  "compilerOptions": {
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "baseUrl": ".",
+    "paths": {
+      "@lib/*": ["lib/*"],
+      "@components/*": ["components/*"],
+      "@prisma_folder/*": ["prisma/*"],
+      "@certificates/*": ["certificates/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "components/*.tsx",
+    "lib/api/middleware/withAuth.js",
+    "lib/api/middleware/withAuth.js",
+    "lib/middleware/withAuth.js",
+    "certificates/private.pem",
+    "certificates/public.pem"
+  ],
+  "exclude": ["node_modules"]
 }
