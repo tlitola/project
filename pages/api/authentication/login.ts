@@ -2,8 +2,8 @@ import { validateLogin } from '../../../lib/validate'
 import { getUser, userActive } from '../../../prisma/User/user'
 import apiKeyHandler from '../_apiKeyHandler'
 import crypto from 'crypto'
-import { addKeys } from '../../../prisma/Jwt/Jwt'
-import { createTokens } from '../../../lib/JWT'
+import { addKeys, keyExists } from '../../../prisma/Jwt/Jwt'
+import JWT, { createTokens } from '../../../lib/JWT'
 import { pick } from 'lodash'
 import { getAuthCookie } from '../../../lib/authUtils'
 import { User } from '@prisma/client'
@@ -13,7 +13,17 @@ const handler = apiKeyHandler().post(async (req, res) => {
   validateLogin(req.body)
   await userActive('email', req.body.user.email)
 
-  if (req.cookies.accessToken !== undefined) throw new Error('201|Already logged in')
+  if (req.cookies.accessToken !== undefined) {
+    let notFound = false
+
+    try {
+      const token = await JWT.validate(req.cookies.accessToken)
+      await keyExists(token.prm, 'primaryKey')
+    } catch (e) {
+      notFound = true
+    }
+    if (!notFound) throw new Error('201|Already authenticated')
+  }
 
   const user = (await getUser('email', req.body.user.email)) as User
 

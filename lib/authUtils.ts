@@ -4,7 +4,7 @@ export const getAuthCookie = (tokens: {
 }): string[] => {
   return [
     `accessToken=${tokens.accessToken}; HttpOnly; Secure; SameSite=strict; Max-Age=86400; Path=/`,
-    `refreshToken=${tokens.refreshToken}; HttpOnly; Secure; SameSite=strict; Max-Age=2592000; Path=/`,
+    `refreshToken=${tokens.refreshToken}; HttpOnly; Secure; SameSite=strict; Max-Age=604800; Path=/`,
   ]
 }
 

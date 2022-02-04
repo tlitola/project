@@ -12,7 +12,7 @@ const apiSchema = Joi.object()
 export const validateApiKey = (headers: IncomingHttpHeaders): void => {
   const { error } = apiSchema.validate(headers)
 
-  if (error !== undefined) throw new Error('401|Authentication needed')
+  if (error !== undefined) throw new Error('401|API key needed')
 }
 
 const authSchema = Joi.object()
@@ -24,6 +24,18 @@ const authSchema = Joi.object()
 
 export const validateAuth = (cookies: NextApiRequestCookies): void => {
   const { error } = authSchema.validate(cookies)
+
+  if (error !== undefined) throw new Error('401|Authentication needed')
+}
+
+const refreshSchema = Joi.object()
+  .keys({
+    refreshToken: Joi.string().required(),
+  })
+  .unknown(true)
+
+export const validateRefresh = (cookies: NextApiRequestCookies): void => {
+  const { error } = refreshSchema.validate(cookies)
 
   if (error !== undefined) throw new Error('401|Authentication needed')
 }

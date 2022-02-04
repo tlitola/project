@@ -79,7 +79,7 @@ export const createTokens = async (
     sub: user.id,
     iss: 'localhost:3000',
     iat: Math.floor(Date.now() / 1000),
-    exp: Math.floor(Date.now() / 1000) + 30 * 24 * 60 * 60,
+    exp: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60,
     prm: keys.secondaryKey,
   })
 

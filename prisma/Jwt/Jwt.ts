@@ -20,7 +20,7 @@ export const addKeys = async (
 
 export const keyExists = async (
   key: string,
-  token: 'primaryKey' | 'secondary|Key'
+  token: 'primaryKey' | 'secondaryKey'
 ): Promise<AuthKey | null> => {
   let exists: AuthKey | null
   try {
@@ -41,7 +41,7 @@ export const keyExists = async (
 
 export const removeKey = async (
   key: string,
-  token: 'primaryKey' | 'secondary|Key'
+  token: 'primaryKey' | 'secondaryKey'
 ): Promise<void> => {
   try {
     await prisma.authKey.deleteMany({

@@ -17,6 +17,6 @@ export default async function withKey(
       },
     })) > 0
 
-  if (!key) throw new Error('401|Authentication needed')
+  if (!key) throw new Error('401|API key required')
   next()
 }
