@@ -35,12 +35,12 @@ export default function authHandler(): NextConnect<
       ;(res as NextApiResponse)
         .status(404)
         .setHeader('Content-Type', 'text/plain')
-        .end('Page is not found')
+        .end('Page not found')
     },
   })
     .use(
       Cors({
-        origin: 'https:localhost:3000',
+        origin: process.env.cors_allowed_origin,
       })
     )
     .use(withKey)

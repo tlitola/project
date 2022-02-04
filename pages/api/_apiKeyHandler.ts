@@ -28,12 +28,12 @@ export default function apiKeyHandler(): NextConnect<
       ;(res as NextApiResponse)
         .status(404)
         .setHeader('Content-Type', 'text/plain')
-        .send('Page is not found')
+        .send('Page not found')
     },
   })
     .use(
       Cors({
-        origin: 'https:localhost:3000',
+        origin: process.env.cors_allowed_origin,
       })
     )
     .use(withKey)

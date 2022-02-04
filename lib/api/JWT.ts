@@ -66,18 +66,18 @@ export const createTokens = async (
   keys: AuthKey
 ): Promise<{ accessToken: string; refreshToken: string }> => {
   const accessToken = await JWT.encode({
-    aud: 'localhost:3000',
+    aud: process.env.base_url as string,
     sub: user.id,
-    iss: 'localhost:3000',
+    iss: process.env.base_url as string,
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 24 * 60 * 60,
     prm: keys.primaryKey,
   })
 
   const refreshToken = await JWT.encode({
-    aud: 'localhost:3000',
+    aud: process.env.base_url as string,
     sub: user.id,
-    iss: 'localhost:3000',
+    iss: process.env.base_url as string,
     iat: Math.floor(Date.now() / 1000),
     exp: Math.floor(Date.now() / 1000) + 7 * 24 * 60 * 60,
     prm: keys.secondaryKey,
