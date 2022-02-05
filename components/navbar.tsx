@@ -14,14 +14,17 @@ export interface Url {
 }
 
 interface Props {
+  history: string[]
   urls: Url[]
   authenticated: boolean
 }
 
-const NavBar: React.FC<Props> = ({ urls, authenticated }) => {
+export const protectedSites = ['/protected']
+
+const NavBar: React.FC<Props> = ({ history, urls, authenticated }) => {
   const [showMenu, setShowMenu] = useState(false)
 
-  const router: BaseRouter = useRouter()
+  const router = useRouter()
 
   const [, setUser] = useContext(UserContext)
 
@@ -48,6 +51,10 @@ const NavBar: React.FC<Props> = ({ urls, authenticated }) => {
                 id: undefined,
               })
               toast.info('Logged out')
+
+              if (protectedSites.includes(router.pathname)) {
+                router.push('/')
+              }
             })
             .catch((e) => console.error(e))
         },

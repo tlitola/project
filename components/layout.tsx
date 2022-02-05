@@ -20,6 +20,10 @@ const urls: Url[] = [
     url: '/contact',
     name: 'Contact',
   },
+  {
+    url: '/protected',
+    name: 'Protected',
+  },
 ]
 
 export interface User {
@@ -83,7 +87,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     <>
       <UserContext.Provider value={[user, setUser]}>
         <HistoryContext.Provider value={[history, setHistory]}>
-          <NavBar urls={urls} authenticated={user.id !== undefined} />
+          <NavBar
+            history={history}
+            urls={urls}
+            authenticated={user.id !== undefined}
+          />
           {children}
         </HistoryContext.Provider>
       </UserContext.Provider>
