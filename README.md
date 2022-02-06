@@ -60,3 +60,5 @@ npm run devhttps
 #or
 yarn devhttps
 ```
+
+Additional security can also be gained by changing the private and public keys from certificates as they can be found on github
