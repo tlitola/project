@@ -40,6 +40,7 @@ const NavBar: React.FC<Props> = ({ history, urls, authenticated }) => {
     () =>
       debounce(
         () => {
+          console.log(history[history.length - 1])
           axiosWithApi
             .get('/authentication/logout')
             .then(() => {
@@ -51,7 +52,7 @@ const NavBar: React.FC<Props> = ({ history, urls, authenticated }) => {
               })
               toast.info('Logged out')
 
-              if (protectedSites.includes(router.pathname)) {
+              if (protectedSites.includes(history[history.length - 1])) {
                 router.push('/')
               }
             })

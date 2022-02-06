@@ -70,7 +70,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       .get('/user')
       .then((response) => setUser({ ...response.data.user } as User))
       .catch((e1) => {
-        console.log(e1.response)
         if (e1.response.status === 401) {
           axiosWithApi
             .get('/authentication/refresh')
