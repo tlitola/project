@@ -108,7 +108,7 @@ const Signup: NextPage = () => {
         setUser(response.data.user)
         toast.success('Signed up')
         if (history.length === 0) {
-          router.push('/signup', '/')
+          router.push('/signup')
         } else router.push(history[history.length - 1])
       })
       .catch((e) => toast.error(e.response.data))
