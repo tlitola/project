@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { validateApiKey } from '../validate'
-import prisma from '@prisma_folder/client'
+import prisma from '@lib/database/client'
 
 export default async function withKey(
   req: NextApiRequest,

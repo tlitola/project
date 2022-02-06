@@ -4,7 +4,6 @@ import { useContext, useEffect } from 'react'
 import { HistoryContext } from '@components/layout'
 import { GetServerSideProps } from 'next'
 import { protectClientRequest } from '@lib/api/middleware/protectClientRequest'
-import { toast } from 'react-toastify'
 import { protectSite } from '@lib/client/protectSite'
 
 interface Props {

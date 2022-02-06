@@ -2,7 +2,8 @@
   "name": "project",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next",
+    "devhttps": "node server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"

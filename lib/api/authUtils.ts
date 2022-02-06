@@ -2,9 +2,16 @@ export const getAuthCookie = (tokens: {
   accessToken: string
   refreshToken: string
 }): string[] => {
+  console.log(process.env.HTTPS)
   return [
-    `accessToken=${tokens.accessToken}; HttpOnly; Secure; SameSite=strict; Max-Age=86400; Path=/`,
-    `refreshToken=${tokens.refreshToken}; HttpOnly; Secure; SameSite=strict; Max-Age=604800; Path=/`,
+    `accessToken=${tokens.accessToken}; HttpOnly; ${
+      // eslint-disable-next-line no-extra-boolean-cast
+      process.env.HTTPS === 'true' ? 'Secure; ' : ''
+    }SameSite=strict; Max-Age=86400; Path=/`,
+    `refreshToken=${tokens.refreshToken}; HttpOnly; ${
+      // eslint-disable-next-line no-extra-boolean-cast
+      process.env.HTTPS === 'true' ? 'Secure; ' : ''
+    }SameSite=strict; Max-Age=604800; Path=/`,
   ]
 }
 

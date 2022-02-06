@@ -1,8 +1,8 @@
 import { AuthKey, User } from '@prisma/client'
 import { NextApiResponse } from 'next'
 import { NextApiRequestWithAuth } from '../../../pages/api/_authHandler'
-import { keyExists } from '@prisma_folder/Jwt/Jwt'
-import { getUser, userActive } from '@prisma_folder/User/user'
+import { keyExists } from '@lib/database/Jwt/Jwt'
+import { getUser, userActive } from '@lib/database/User/user'
 import JWT from '../JWT'
 import { validateAuth } from '../validate'
 

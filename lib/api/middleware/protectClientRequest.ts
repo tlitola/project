@@ -1,4 +1,4 @@
-import { userActive } from '@prisma_folder/User/user'
+import { userActive } from '@lib/database/User/user'
 import Joi, { string } from 'joi'
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
 import { NextApiRequestCookies } from 'next/dist/server/api-utils'

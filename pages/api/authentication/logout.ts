@@ -1,4 +1,4 @@
-import { removeKey } from '@prisma_folder/Jwt/Jwt'
+import { removeKey } from '@lib/database/Jwt/Jwt'
 import { removeAuthCookie } from '@lib/api/authUtils'
 import authHandler from '../_authHandler'
 
