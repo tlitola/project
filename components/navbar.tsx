@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import React, { useContext, useMemo, useState } from 'react'
 import debounce from 'lodash.debounce'
 import { axiosWithApi } from '@lib/client/axios'
-import { UserContext } from './layout'
+import { HistoryContext, UserContext } from './layout'
 import { toast } from 'react-toastify'
 
 export interface Url {
@@ -13,18 +13,18 @@ export interface Url {
 }
 
 interface Props {
-  history: string[]
   urls: Url[]
   authenticated: boolean
 }
 
 export const protectedSites = ['/protected']
 
-const NavBar: React.FC<Props> = ({ history, urls, authenticated }) => {
+const NavBar: React.FC<Props> = ({ urls, authenticated }) => {
   const [showMenu, setShowMenu] = useState(false)
 
   const router = useRouter()
 
+  const [history] = useContext(HistoryContext)
   const [, setUser] = useContext(UserContext)
 
   const onMenuClick = useMemo(

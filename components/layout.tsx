@@ -87,11 +87,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     <>
       <UserContext.Provider value={[user, setUser]}>
         <HistoryContext.Provider value={[history, setHistory]}>
-          <NavBar
-            history={history}
-            urls={urls}
-            authenticated={user.id !== undefined}
-          />
+          <NavBar urls={urls} authenticated={user.id !== undefined} />
           {children}
         </HistoryContext.Provider>
       </UserContext.Provider>
