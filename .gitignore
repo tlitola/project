@@ -37,12 +37,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 
-server.js
-
 yarn.lock
 .prettierignore
-.prettierrc.json
-.eslintrc.json
+
 .eslintignore
 
 certificates

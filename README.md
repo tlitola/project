@@ -9,22 +9,21 @@ The styling in this project is done with Tailwind and the database utilices wrap
 
 ## Getting Started
 
-First, install the dependencies
+Start by cloning the repository `git clone https://github.com/tlitola/project.git`
+
+Then navigate to the folder in your terminal and install the dependencies
 
 ```bash
 npm i
 #or
-yarn dev
+yarn install
 ```
 
-Then certificates-example to certificates and insert proper tokens inside.
-You'll also need to rename `.env-example.local` to `.env.local` and fill it out.
+Then rename folder `certificates-example` to `certficates` and remove the example tag from the token names inside. Optionally you can supply your own tokens and add certificates (see more under security)
 
-Lastly before you can start developing you'll need to migrate the database with
+You'll also need to rename `.env-example` to `.env` and fill in absolute path to your certificates folder (apparently next doesn't like relative paths...). You can further edit the file if you wish to change the default behavior (see Custom database).
 
-```bash
-npx prisma migrate dev --name init
-```
+Lastly rename `.prisma` to `prisma`
 
 To start the development server run
 
@@ -34,6 +33,30 @@ npm run dev
 yarn dev
 ```
 
-If you wish to connect to the backend, you'll need to add authentication token to the database
-
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+
+## Custom Database
+
+By default, Project uses sqlite. You can change this by deleting prisma folder and copying one of the folders inside `prisma-example` under project-folder and renaming it to prisma. You'll also need to update the database_url inside of `.env`
+
+Then you'll need to migrate the database by running
+
+```bash
+npx prisma migrate dev --name init
+```
+
+and add your API-key to the database and `.env`
+
+## Security
+
+If you wish to enable https on your local development server start by adding your certificates to the `certificates`-folder. You can generate the certificates using [mkcert](https://github.com/FiloSottile/mkcert) for example
+
+Then inside `.env` enable https.
+
+You can run your server with
+
+```bash
+npm run devhttps
+#or
+yarn devhttps
+```

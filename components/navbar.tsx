@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
-import { BaseRouter } from 'next/dist/shared/lib/router/router'
 import React, { useContext, useMemo, useState } from 'react'
 import debounce from 'lodash.debounce'
 import { axiosWithApi } from '@lib/client/axios'

@@ -1,16 +1,7 @@
 import { userActive } from '@lib/database/User/user'
-import Joi, { string } from 'joi'
-import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next'
-import { NextApiRequestCookies } from 'next/dist/server/api-utils'
+import { GetServerSidePropsContext } from 'next'
 import JWT from '../JWT'
 import { validateAuth } from '../validate'
-
-const tokenSchema = Joi.object()
-  .keys({
-    accessToken: Joi.string().required(),
-    refreshToken: Joi.string().required(),
-  })
-  .unknown(true)
 
 export const protectClientRequest = async (
   ctx: GetServerSidePropsContext
