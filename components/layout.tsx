@@ -69,13 +69,14 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     axiosWithApi
       .get('/user')
       .then((response) => setUser({ ...response.data.user } as User))
-      .catch((e) => {
-        if (e.response.status === 401) {
+      .catch((e1) => {
+        console.log(e1.response)
+        if (e1.response.status === 401) {
           axiosWithApi
             .get('/authentication/refresh')
             .then((response) => setUser({ ...response.data.user } as User))
-            .catch((e) => {
-              if (e.response.status !== 401) console.error(e.message)
+            .catch((e2) => {
+              if (e2.response.status !== 401) console.error(e2.message)
             })
         }
       })
