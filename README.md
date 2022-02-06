@@ -51,7 +51,7 @@ and add your API-key to the database and `.env`
 
 If you wish to enable https on your local development server start by adding your certificates to the `certificates`-folder. You can generate the certificates using [mkcert](https://github.com/FiloSottile/mkcert) for example
 
-Then inside `.env` enable https.
+Then inside `.env` enable https and change all http's in urls ot https.
 
 You can run your server with
 

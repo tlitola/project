@@ -44,3 +44,5 @@ yarn.lock
 
 certificates
 prisma
+
+/next.config.js
