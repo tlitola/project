@@ -21,7 +21,7 @@ yarn install
 
 Then rename folder `certificates-example` to `certficates` and remove the example tag from the token names inside. Optionally you can supply your own tokens and add certificates (see more under security)
 
-You'll also need to rename `.env-example` to `.env` and fill in absolute path to your certificates folder (apparently next doesn't like relative paths...). You can further edit the file if you wish to change the default behavior (see Custom database).
+You'll also need to rename `.env-example` to `.env`. You can further edit the file if you wish to change the default behavior (see Custom database).
 
 Lastly rename `.prisma` to `prisma`
 
@@ -51,7 +51,7 @@ and add your API-key to the database and `.env`
 
 If you wish to enable https on your local development server start by adding your certificates to the `certificates`-folder. You can generate the certificates using [mkcert](https://github.com/FiloSottile/mkcert) for example
 
-Then inside `.env` enable https and change all http's in urls ot https.
+Then inside `.env` enable https and change all http's in urls to https.
 
 You can run your server with
 

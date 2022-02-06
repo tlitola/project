@@ -1,7 +1,6 @@
 import { AuthKey, User } from '@prisma/client'
 import { readFile } from 'fs/promises'
 import { sign, verify } from 'jsonwebtoken'
-import path from 'path'
 
 interface JWTinfo {
   aud: string

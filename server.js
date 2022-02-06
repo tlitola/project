@@ -4,21 +4,21 @@ const next = require('next')
 const fs = require('fs')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({
-	dev,
-	hostname: 'https://localhost',
-	port: 3000, // or whichever port you're using
+  dev,
+  hostname: 'https://localhost',
+  port: 3000, // or whichever port you're using
 })
 const handle = app.getRequestHandler()
 const httpsOptions = {
-	key: fs.readFileSync('./certificates/localhost-key.pem'),
-	cert: fs.readFileSync('./certificates/localhost.pem'),
+  key: fs.readFileSync('./certificates/localhost-key.pem'),
+  cert: fs.readFileSync('./certificates/localhost.pem'),
 }
 app.prepare().then(() => {
-	createServer(httpsOptions, (req, res) => {
-		const parsedUrl = parse(req.url, true)
-		handle(req, res, parsedUrl)
-	}).listen(3000, (err) => {
-		if (err) throw err
-		console.log('> Server started on https://localhost:3000')
-	})
+  createServer(httpsOptions, (req, res) => {
+    const parsedUrl = parse(req.url, true)
+    handle(req, res, parsedUrl)
+  }).listen(3000, (err) => {
+    if (err) throw err
+    console.log('> Server started on https://localhost:3000')
+  })
 })

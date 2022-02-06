@@ -10,7 +10,6 @@ const Home: NextPage = () => {
 
   useEffect(() => {
     setHistory((prev) => [...prev, router.pathname])
-    console.log(process.env.HTTPS)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
