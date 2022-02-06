@@ -23,7 +23,7 @@ Then rename folder `certificates-example` to `certficates` and remove the exampl
 
 You'll also need to rename `.env-example` to `.env`. You can further edit the file if you wish to change the default behavior (see Custom database).
 
-Lastly rename `.prisma` to `prisma`
+Lastly rename `.prisma` to `prisma` and run `npx prisma generate`
 
 To start the development server run
 
