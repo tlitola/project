@@ -19,7 +19,7 @@ npm i
 yarn install
 ```
 
-Then copy and rename folder `certificates-example` to `certficates` and remove the example tag from the token names inside. Optionally you can supply your own tokens and add certificates (see more under security)
+Then copy and rename folder `certificates-example` to `certficates`. Optionally you can supply your own tokens and add certificates (see more under security)
 
 You'll also need to copy and rename `.env-example` to `.env`. You can further edit the file if you wish to change the default behavior (see Custom database).
 
