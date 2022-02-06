@@ -49,6 +49,8 @@ and add your API-key to the database and `.env`
 
 ## Security
 
+You can create your own API_key to the database and supply it to the `.env`so the API key isn't publicly awailable
+
 If you wish to enable https on your local development server start by adding your certificates to the `certificates`-folder. You can generate the certificates using [mkcert](https://github.com/FiloSottile/mkcert) for example
 
 Then inside `.env` enable https and change all http's in urls to https.
