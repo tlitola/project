@@ -24,7 +24,6 @@ const NavBar: React.FC<Props> = ({ urls, authenticated }) => {
 
   const router = useRouter()
 
-  const [history] = useContext(HistoryContext)
   const [, setUser] = useContext(UserContext)
 
   const onMenuClick = useMemo(
@@ -40,7 +39,6 @@ const NavBar: React.FC<Props> = ({ urls, authenticated }) => {
     () =>
       debounce(
         () => {
-          console.log(history[history.length - 1])
           axiosWithApi
             .get('/authentication/logout')
             .then(() => {
@@ -50,9 +48,10 @@ const NavBar: React.FC<Props> = ({ urls, authenticated }) => {
                 last_name: undefined,
                 id: undefined,
               })
-              toast.info('Logged out')
 
-              if (protectedSites.includes(history[history.length - 1])) {
+              router.reload()
+              toast.info('Logged out')
+              if (protectedSites.includes(router.pathname)) {
                 router.push('/')
               }
             })
